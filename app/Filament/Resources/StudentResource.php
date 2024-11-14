@@ -23,6 +23,9 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('nim')
+                    ->required()
+                    ->maxLength(15),
                 Forms\Components\TextInput::make('student_card')
                     ->required()
                     ->maxLength(20),
@@ -49,6 +52,8 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('nim')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('student_card')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')

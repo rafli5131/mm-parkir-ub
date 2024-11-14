@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('parking_entries', function (Blueprint $table) {
             $table->id();
+            $table->char('student_card',25);
             $table->foreign('student_card')->references('student_card')->on('students')->onDelete('cascade');
             $table->foreignId('parking_lot_id')->constrained()->onDelete('cascade');
             $table->dateTime('entry_time');
