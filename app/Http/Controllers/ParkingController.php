@@ -16,13 +16,13 @@ class ParkingController extends Controller
 
         $activeEntry = DB::table('parking_entries')
             ->where('student_card', $request->student_card)
-            ->whereNull('time_out')
+            ->whereNull('exit_time')
             ->first();
 
         if ($activeEntry) {
             DB::table('parking_entries')
                 ->where('id', $activeEntry->id)
-                ->update(['time_out' => now(), 'status' => 0]);
+                ->update(['exit_time' => now(), 'status' => 0]);
 
             return response()->json(['message' => 'Sucsess Tap Out'], 200);
         } else {
@@ -42,7 +42,7 @@ class ParkingController extends Controller
                 DB::table('parking_entries')->insert([
                     'student_card' => $request->student_card,
                     'parking_lot_id' => $request->parking_lot_id,
-                    'time_in' => now(),
+                    'entry_time' => now(),
                 ]);
 
                 return response()->json(['message' => 'Sucsess Tap In'], 200);
